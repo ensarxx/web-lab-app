@@ -130,11 +130,18 @@ function App() {
             </article>
 
             <article className="project-card">
-              <h3>Görev Yöneticisi Uygulaması</h3>
+              <h3>Tatil Masrafım: Bütçe Takip</h3>
               <p>
-                Kullanıcıların günlük görevlerini ekleyip takip edebildiği,
-                localStorage ile veri saklayan bir SPA uygulaması.
+                Flutter/Dart kullanılarak geliştirimiş tatil bütçe takip ve paylaşım uygulaması.
               </p>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.dasapps.tatilmasrafim&hl=tr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="store-link"
+              >
+                Google Play'de Görüntüle
+              </a>
             </article>
           </div>
         </section>

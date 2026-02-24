@@ -206,6 +206,24 @@ section h3 {
   color: rgba(255, 255, 255, 0.85);
 }
 
+.store-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.45rem 1rem;
+  background: #818cf8;
+  color: #000;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.store-link:hover,
+.store-link:focus {
+  background: #a5b4fc;
+}
+
 /* ═══════════════════════════════════════
    CONTACT FORM
    ═══════════════════════════════════════ */
@@ -239,6 +257,11 @@ section h3 {
   font-family: inherit;
   font-size: 1rem;
   transition: border-color 0.2s;
+}
+
+.form-group select option {
+  background: #1e1e2e;
+  color: #e2e8f0;
 }
 
 .form-group input:focus,
@@ -314,6 +337,11 @@ section h3 {
     border-color: #94a3b8;
   }
 
+  .form-group select option {
+    background: #fff;
+    color: #1e293b;
+  }
+
   .error-msg { color: #dc2626; }
 
   .contact-form button[type="submit"] {
@@ -325,6 +353,9 @@ section h3 {
   }
 
   .project-card p { color: #334155; }
+  .store-link { background: #4338ca; color: #fff; }
+  .store-link:hover,
+  .store-link:focus { background: #3730a3; }
   .profile-figure figcaption { color: #4338ca; }
   .info-card ul li::before { color: #4338ca; }
   .site-footer { color: rgba(0, 0, 0, 0.6); border-top-color: rgba(0,0,0,0.1); }
