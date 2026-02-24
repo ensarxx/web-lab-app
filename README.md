@@ -1,75 +1,57 @@
-# React + TypeScript + Vite
+# 🌐 Web Tasarımı ve Programlama - LAB-1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📋 Hakkında
 
-Currently, two official plugins are available:
+Bu proje, **Web Tasarımı ve Programlama** dersi kapsamında hazırlanan LAB-1 çalışmasıdır. Proje; React, TypeScript ve Vite kullanılarak oluşturulmuş modern bir web uygulamasıdır. Kişisel bilgilerin, bölüm bilgisinin ve hobilerin yer aldığı bir tanıtım sayfası içermektedir.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Geliştirici
 
-## React Compiler
+| Bilgi | Detay |
+|-------|-------|
+| **Ad Soyad** | Ensar DAŞ |
+| **Öğrenci No** | 230541079 |
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## 🛠 Kullanılan Teknolojiler
 
-Note: This will impact Vite dev & build performances.
+- **React 18** — Kullanıcı arayüzü geliştirme kütüphanesi
+- **TypeScript** — Tip güvenli JavaScript
+- **Vite** — Hızlı geliştirme sunucusu ve build aracı
+- **ESLint** — Kod kalitesi ve stil denetimi
+- **CSS3** — Sayfa stil ve düzenleme
 
-## Expanding the ESLint configuration
+##  Kurulum ve Çalıştırma
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Gereksinimler
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [Node.js](https://nodejs.org/) (v18 veya üzeri)
+- [npm](https://www.npmjs.com/) veya [yarn](https://yarnpkg.com/)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Kurulum Adımları
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# 1. Repoyu klonlayın
+git clone https://github.com/Ensar/web-lab-hello.git
+
+# 2. Proje dizinine gidin
+cd web-lab-hello
+
+# 3. Bağımlılıkları yükleyin
+npm install
+
+# 4. Geliştirme sunucusunu başlatın
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Diğer Komutlar
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Projeyi derleyin (production build)
+npm run build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Derlenen projeyi önizleyin
+npm run preview
+
+# Lint kontrolü yapın
+npm run lint
 ```
+
