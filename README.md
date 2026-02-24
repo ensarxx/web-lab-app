@@ -1,6 +1,6 @@
-# 🌐 Web Tasarımı ve Programlama - LAB-1
+# Web Tasarımı ve Programlama - LAB-1
 
-## 📋 Hakkında
+## Hakkında
 
 Bu proje, **Web Tasarımı ve Programlama** dersi kapsamında hazırlanan LAB-1 çalışmasıdır. Proje; React, TypeScript ve Vite kullanılarak oluşturulmuş modern bir web uygulamasıdır. Kişisel bilgilerin, bölüm bilgisinin ve hobilerin yer aldığı bir tanıtım sayfası içermektedir.
 
