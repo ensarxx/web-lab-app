@@ -55,3 +55,6 @@ npm run preview
 npm run lint
 ```
 
+### Lighthouse Test
+![alt text](image.png)
+
