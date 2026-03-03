@@ -70,7 +70,7 @@ function App() {
 
       {/* HEADER */}
       <header className="site-header">
-        <h1>Ensar DAŞ — Portfolyo</h1>
+        <h1 className="site-title">Ensar DAŞ — Portfolyo</h1>
 
         <nav aria-label="Ana navigasyon">
           <ul className="nav-list">
@@ -87,31 +87,47 @@ function App() {
         <section id="hakkimda" aria-labelledby="hakkimda-baslik">
           <h2 id="hakkimda-baslik">Hakkımda</h2>
 
-          <figure className="profile-figure">
-            <img
-              src="src\assets\ensar_resim.jpg"
-              alt="Ensar DAŞ profil fotoğrafı"
-              width={180}
-              height={180}
-            />
-            <figcaption>Ensar DAŞ</figcaption>
-          </figure>
+          <div className="about-content">
+            <figure className="profile-figure">
+              <img
+                src="src\assets\ensar_resim.jpg"
+                alt="Ensar DAŞ profil fotoğrafı"
+                width={180}
+                height={180}
+              />
+              <figcaption>Ensar DAŞ</figcaption>
+            </figure>
 
-          <div className="info-card">
-            <h3>Kişisel Bilgiler</h3>
-            <p><strong>Ad Soyad:</strong> Ensar DAŞ</p>
-            <p><strong>Öğrenci No:</strong> 230541079</p>
-            <p><strong>Bölüm:</strong> Yazılım Mühendisliği</p>
-          </div>
+            <div>
+              <div className="info-card">
+                <h3>Kişisel Bilgiler</h3>
+                <p><strong>Ad Soyad:</strong> Ensar DAŞ</p>
+                <p><strong>Öğrenci No:</strong> 230541079</p>
+                <p><strong>Bölüm:</strong> Yazılım Mühendisliği</p>
+              </div>
 
-          <div className="info-card">
-            <h3>Hobilerim</h3>
-            <ul>
-              <li>Yazılım Geliştirme</li>
-              <li>Web Tasarımı</li>
-              <li>Oyun Oynama</li>
-              <li>Müzik Dinleme</li>
-            </ul>
+              <div className="info-card">
+                <h3>Hobilerim</h3>
+                <ul>
+                  <li>Yazılım Geliştirme</li>
+                  <li>Web Tasarımı</li>
+                  <li>Oyun Oynama</li>
+                  <li>Müzik Dinleme</li>
+                </ul>
+              </div>
+
+              <div className="info-card">
+                <h3>Becerilerim</h3>
+                <ul className="skill-tags" role="list" aria-label="Beceri etiketleri">
+                  <li>HTML5</li>
+                  <li>CSS3</li>
+                  <li>JavaScript</li>
+                  <li>React</li>
+                  <li>TypeScript</li>
+                  <li>Git</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -119,7 +135,7 @@ function App() {
         <section id="projelerim" aria-labelledby="projelerim-baslik">
           <h2 id="projelerim-baslik">Projelerim</h2>
 
-          <div className="projects-grid">
+          <div className="project-grid">
             <article className="project-card">
               <h3>Portfolyo Web Sitesi</h3>
               <p>
@@ -127,13 +143,22 @@ function App() {
                 portfolyo sayfası. Semantik HTML5 ve erişilebilirlik
                 standartlarına uygun şekilde tasarlanmıştır.
               </p>
+              <ul className="skill-tags">
+                <li>React</li>
+                <li>TypeScript</li>
+                <li>Vite</li>
+              </ul>
             </article>
 
             <article className="project-card">
               <h3>Tatil Masrafım: Bütçe Takip</h3>
               <p>
-                Flutter/Dart kullanılarak geliştirimiş tatil bütçe takip ve paylaşım uygulaması.
+                Flutter/Dart kullanılarak geliştirilmiş tatil bütçe takip ve paylaşım uygulaması.
               </p>
+              <ul className="skill-tags">
+                <li>Flutter</li>
+                <li>Dart</li>
+              </ul>
               <a
                 href="https://play.google.com/store/apps/details?id=com.dasapps.tatilmasrafim&hl=tr"
                 target="_blank"
@@ -142,6 +167,17 @@ function App() {
               >
                 Google Play'de Görüntüle
               </a>
+            </article>
+
+            <article className="project-card">
+              <h3>Hava Durumu</h3>
+              <p>
+                OpenWeather API ile anlık hava durumu bilgisi sunan web uygulaması.
+              </p>
+              <ul className="skill-tags">
+                <li>JavaScript</li>
+                <li>API</li>
+              </ul>
             </article>
           </div>
         </section>
