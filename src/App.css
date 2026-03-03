@@ -1,6 +1,8 @@
-/* ═══════════════════════════════════════
-   RESET & BASE
-   ═══════════════════════════════════════ */
+/* ========================================
+   MOBIL VARSAYILAN (0 - 639px)
+   ======================================== */
+
+/* Genel sıfırlama */
 *,
 *::before,
 *::after {
@@ -9,224 +11,298 @@
   box-sizing: border-box;
 }
 
-/* ═══════════════════════════════════════
-   SKIP LINK (Erişilebilirlik)
-   ═══════════════════════════════════════ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== SKIP LINK ===== */
 .skip-link {
   position: absolute;
   top: -100%;
   left: 16px;
-  background: #2563eb;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 0 0 8px 8px;
+  background: var(--color-secondary);
+  color: var(--color-bg);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
   font-weight: 600;
   z-index: 1000;
-  transition: top 0.2s;
+  transition: top var(--transition-fast);
 }
 
 .skip-link:focus {
   top: 0;
 }
 
-/* ═══════════════════════════════════════
-   FOCUS GÖSTERGESI (Tüm elemanlar)
-   ═══════════════════════════════════════ */
+/* ===== FOCUS GÖSTERGESI ===== */
 :focus {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--color-secondary);
   outline-offset: 2px;
 }
 
-/* ═══════════════════════════════════════
-   LAYOUT
-   ═══════════════════════════════════════ */
-#root {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* ═══════════════════════════════════════
-   HEADER & NAV
-   ═══════════════════════════════════════ */
+/* ===== HEADER ===== */
 .site-header {
-  text-align: center;
-  padding: 2.5rem 1rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.site-header h1 {
-  font-size: 2.2rem;
-  color: #818cf8;
-  margin-bottom: 1rem;
-}
-
-.nav-list {
-  list-style: none;
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Logo / Site adı */
+.site-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+/* ===== NAV LISTESI ===== */
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: var(--space-sm);
   padding: 0;
+  margin: 0;
 }
 
 .nav-list a {
-  font-weight: 500;
-  color: #a5b4fc;
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-text);
   text-decoration: none;
-  padding: 0.3rem 0;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s, color 0.2s;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: background var(--transition-fast),
+              color var(--transition-fast);
 }
 
 .nav-list a:hover,
 .nav-list a:focus {
-  color: #818cf8;
-  border-bottom-color: #818cf8;
+  background-color: var(--color-primary);
+  color: var(--color-bg);
 }
 
-/* ═══════════════════════════════════════
-   MAIN & SECTIONS
-   ═══════════════════════════════════════ */
-main {
-  padding: 2rem 0;
+/* Mobilde dikey yığın */
+@media (max-width: 639px) {
+  .site-header {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .nav-list a {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
 }
 
+/* ===== SECTION'LAR ===== */
 section {
-  margin-bottom: 3rem;
+  padding: var(--space-xl) var(--space-md);
 }
 
 section h2 {
-  font-size: 1.8rem;
-  color: #a5b4fc;
-  margin-bottom: 1.2rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid rgba(100, 108, 255, 0.3);
-  display: inline-block;
+  font-size: var(--text-2xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-lg);
+  text-align: center;
 }
 
 section h3 {
-  font-size: 1.25rem;
-  color: #b4bfff;
-  margin-bottom: 0.6rem;
+  font-size: var(--text-xl);
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
 }
 
-/* ═══════════════════════════════════════
-   PROFILE FIGURE
-   ═══════════════════════════════════════ */
-.profile-figure {
+/* ===== HAKKIMDA: Mobilde tek sütun, ortalanmış ===== */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
   text-align: center;
-  margin-bottom: 1.5rem;
 }
 
-.profile-figure img {
-  border-radius: 50%;
-  border: 3px solid #818cf8;
+.about-content figure {
+  max-width: 200px;
+}
+
+.about-content img {
+  border-radius: var(--radius-full);
+  aspect-ratio: 1;
   object-fit: cover;
 }
 
+.profile-figure {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
 .profile-figure figcaption {
-  margin-top: 0.6rem;
-  font-size: 0.9rem;
-  color: #a5b4fc;
+  margin-top: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
   font-style: italic;
 }
 
-/* ═══════════════════════════════════════
-   INFO CARDS
-   ═══════════════════════════════════════ */
+/* ===== INFO CARDS ===== */
 .info-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem 2rem;
-  max-width: 500px;
-  margin: 0 auto 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+  max-width: 600px;
+  margin: 0 auto var(--space-md);
   text-align: left;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform var(--transition-normal),
+              box-shadow var(--transition-normal);
 }
 
 .info-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(100, 108, 255, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .info-card p {
-  margin: 0.5rem 0;
+  margin: var(--space-xs) 0;
   line-height: 1.6;
 }
 
-.info-card ul {
+.info-card ul:not(.skill-tags) {
   list-style: none;
   padding: 0;
 }
 
-.info-card ul li {
-  padding: 0.4rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.info-card ul:not(.skill-tags) li {
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.info-card ul li::before {
+.info-card ul:not(.skill-tags) li::before {
   content: "▹ ";
-  color: #818cf8;
+  color: var(--color-accent);
   font-weight: bold;
 }
 
-.info-card ul li:last-child {
+.info-card ul:not(.skill-tags) li:last-child {
   border-bottom: none;
 }
 
-/* ═══════════════════════════════════════
-   PROJECT CARDS
-   ═══════════════════════════════════════ */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+/* ===== SKILL TAGS (Beceri Etiketleri) ===== */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  list-style: none;
+  padding: 0;
 }
 
+.skill-tags li {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  padding: var(--space-xs) var(--space-lg);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.skill-tags li::before {
+  content: none;
+}
+
+/* ===== PROJE GRID ===== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+}
+
+/* ===== PROJE KARTI ===== */
 .project-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--transition-normal),
+              box-shadow var(--transition-normal);
 }
 
 .project-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 24px rgba(100, 108, 255, 0.2);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Kart içeriği */
+.project-card h3,
+.project-card p,
+.project-card .skill-tags {
+  padding: 0 var(--space-lg);
 }
 
 .project-card h3 {
-  margin-bottom: 0.6rem;
+  margin-top: var(--space-md);
+  font-size: var(--text-lg);
 }
 
 .project-card p {
+  color: var(--color-muted);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  flex-grow: 1;
+}
+
+.project-card .skill-tags {
+  padding-bottom: var(--space-lg);
+  margin-top: auto;
 }
 
 .store-link {
   display: inline-block;
-  margin-top: 0.8rem;
-  padding: 0.45rem 1rem;
-  background: #818cf8;
-  color: #000;
+  margin: 0 var(--space-lg) var(--space-lg);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-primary);
+  color: var(--color-bg);
   font-weight: 600;
-  font-size: 0.9rem;
-  border-radius: 6px;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background var(--transition-fast);
 }
 
 .store-link:hover,
 .store-link:focus {
-  background: #a5b4fc;
+  background: var(--color-accent);
 }
 
-/* ═══════════════════════════════════════
-   CONTACT FORM
-   ═══════════════════════════════════════ */
+/* ===== İLETİŞİM FORMU ===== */
 .contact-form {
   max-width: 520px;
   margin: 0 auto;
@@ -234,130 +310,121 @@ section h3 {
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  margin-bottom: var(--space-md);
 }
 
 .form-group label {
+  display: block;
+  margin-bottom: var(--space-xs);
   font-weight: 600;
-  font-size: 0.95rem;
-  color: #c4c9ff;
+  color: var(--color-text);
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  color: inherit;
+input,
+textarea,
+select {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   font-family: inherit;
-  font-size: 1rem;
-  transition: border-color 0.2s;
+  font-size: var(--text-base);
+  color: inherit;
+  background: var(--color-surface);
+  transition: border-color var(--transition-fast);
 }
 
-.form-group select option {
-  background: #1e1e2e;
-  color: #e2e8f0;
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--color-primary);
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: #818cf8;
-}
-
-.form-group input[aria-invalid="true"],
-.form-group select[aria-invalid="true"],
-.form-group textarea[aria-invalid="true"] {
-  border-color: #ef4444;
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
 }
 
 .error-msg {
   min-height: 1.2em;
-  font-size: 0.82rem;
-  color: #fca5a5;
+  font-size: var(--text-sm);
+  color: var(--color-error);
   font-weight: 500;
+  margin-top: var(--space-xs);
 }
 
-.contact-form button[type="submit"] {
+button[type="submit"] {
   width: 100%;
-  padding: 0.75rem;
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-primary);
+  color: var(--color-bg);
   border: none;
-  border-radius: 8px;
-  background: #818cf8;
-  color: #000;
-  font-size: 1rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background var(--transition-fast);
 }
 
-.contact-form button[type="submit"]:hover {
-  background: #a5b4fc;
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+  background: var(--color-secondary);
 }
 
-/* ═══════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════ */
+/* ===== FOOTER ===== */
 .site-footer {
   text-align: center;
-  padding: 1.5rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.65);
+  padding: var(--space-xl) var(--space-md);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
 }
 
-/* ═══════════════════════════════════════
-   LIGHT MODE
-   ═══════════════════════════════════════ */
-@media (prefers-color-scheme: light) {
-  .site-header h1 { color: #3730a3; }
-  .nav-list a { color: #3730a3; }
-  .nav-list a:hover,
-  .nav-list a:focus { color: #312e81; border-bottom-color: #312e81; }
-
-  section h2 { color: #3730a3; }
-  section h3 { color: #4338ca; }
-
-  .info-card,
-  .project-card {
-    background: rgba(0, 0, 0, 0.03);
-    border-color: rgba(0, 0, 0, 0.1);
+/* ========================================
+   TABLET (640px ve üzeri)
+   ======================================== */
+@media (min-width: 640px) {
+  section {
+    padding: var(--space-2xl) var(--space-xl);
   }
 
-  .form-group label { color: #1e293b; }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    background: #fff;
-    border-color: #94a3b8;
+  /* Hakkımda: yatay düzen */
+  .about-content {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
   }
 
-  .form-group select option {
-    background: #fff;
-    color: #1e293b;
+  .about-content figure {
+    flex-shrink: 0;
   }
 
-  .error-msg { color: #dc2626; }
-
-  .contact-form button[type="submit"] {
-    background: #4338ca;
-    color: #fff;
+  /* Form butonu tam genişlik olmaktan çıkar */
+  button[type="submit"] {
+    width: auto;
   }
-  .contact-form button[type="submit"]:hover {
-    background: #3730a3;
+}
+
+/* ========================================
+   MASAÜSTÜ (1024px ve üzeri)
+   ======================================== */
+@media (min-width: 1024px) {
+  /* İçerik genişliği sınırla */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .project-card p { color: #334155; }
-  .store-link { background: #4338ca; color: #fff; }
-  .store-link:hover,
-  .store-link:focus { background: #3730a3; }
-  .profile-figure figcaption { color: #4338ca; }
-  .info-card ul li::before { color: #4338ca; }
-  .site-footer { color: rgba(0, 0, 0, 0.6); border-top-color: rgba(0,0,0,0.1); }
-  .site-header { border-bottom-color: rgba(0,0,0,0.1); }
+  section {
+    padding: var(--space-3xl) var(--space-xl);
+  }
+
+  /* Proje kartları en az 3 sütun */
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
