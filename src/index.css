@@ -1,16 +1,28 @@
+@import "tailwindcss";
+
+/* ── Dark mode: class bazlı kontrol ── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Design Tokens (Tailwind v4 @theme) ── */
+@theme {
+  /* Renkler */
+  --color-primary: #1E3A8A;
+  --color-secondary: #2563EB;
+  --color-accent: #7C3AED;
+  --color-surface: #F9FAFB;
+  --color-muted: #6B7280;
+  --color-error: #DC2626;
+  --color-success: #16A34A;
+
+  /* Fontlar */
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-mono: 'Fira Code', 'Consolas', monospace;
+}
+
+/* ── Global Bazlar ── */
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: var(--color-secondary);
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: var(--color-primary);
 }
