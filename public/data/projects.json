@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Kişisel Portfolyo Sitesi",
+    "description": "React ve Tailwind kullanılarak geliştirilen responsive kişisel portfolyo sitesi.",
+    "tech": ["React", "TypeScript", "Tailwind"],
+    "year": 2025,
+    "category": "frontend",
+    "featured": true,
+    "image": "/images/portfolio.png",
+    "demoUrl": "https://example.com/portfolio",
+    "sourceUrl": "https://github.com/ensarxx/portfolio"
+  },
+  {
+    "id": 2,
+    "title": "Tatil Masrafım Mobil Uygulaması",
+    "description": "Arkadaşlarla yapılan tatillerde masraf paylaşımını yöneten Flutter tabanlı mobil uygulama.",
+    "tech": ["Flutter", "Dart", "Firebase"],
+    "year": 2024,
+    "category": "fullstack",
+    "featured": true,
+    "image": "/images/holiday-budget.png",
+    "demoUrl": null,
+    "sourceUrl": "https://github.com/ensarxx/tatil-masrafim"
+  },
+  {
+    "id": 3,
+    "title": "Hava Durumu Web Uygulaması",
+    "description": "OpenWeather API üzerinden anlık hava durumu bilgisi gösteren web uygulaması.",
+    "tech": ["JavaScript", "API", "Vite"],
+    "year": 2023,
+    "category": "frontend",
+    "featured": false,
+    "image": "/images/weather-app.png",
+    "demoUrl": "https://example.com/weather",
+    "sourceUrl": null
+  },
+  {
+    "id": 4,
+    "title": "Blog API Backend",
+    "description": "Node.js ve Express ile geliştirilmiş JWT doğrulamalı RESTful blog API'si.",
+    "tech": ["Node.js", "Express", "MongoDB"],
+    "year": 2022,
+    "category": "backend",
+    "featured": false,
+    "image": "/images/blog-api.png",
+    "demoUrl": null,
+    "sourceUrl": "https://github.com/ensarxx/blog-api"
+  },
+  {
+    "id": 5,
+    "title": "Görev Yönetim Paneli",
+    "description": "Fullstack görev ve proje yönetim paneli. Rol bazlı yetkilendirme ve gerçek zamanlı güncellemeler içerir.",
+    "tech": ["React", "Node.js", "PostgreSQL", "WebSocket"],
+    "year": 2025,
+    "category": "fullstack",
+    "featured": true,
+    "image": "/images/task-dashboard.png",
+    "demoUrl": "https://example.com/tasks",
+    "sourceUrl": "https://github.com/ensarxx/task-dashboard"
+  }
+]
