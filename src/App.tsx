@@ -1,13 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from './components/Button'
 import Input from './components/Input'
 import Card from './components/Card'
 import UIKit from './pages/UIKit'
+import type { FilterState, Project, SortField, SortOrder } from './types/project'
+import { fetchProjects } from './services/projectService'
+import { applyFilters } from './utils/projectHelpers'
 
 function App() {
   /* ── Sayfa state'i ── */
   const [page, setPage] = useState<'portfolio' | 'uikit'>('portfolio')
   const [dark, setDark] = useState(false)
+
+  /* ── Proje ve filtre state'leri ── */
+  const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [filters, setFilters] = useState<FilterState>({
+    search: '',
+    category: 'all',
+    sortField: 'year',
+    sortOrder: 'desc',
+  })
 
   /* ── Form state'leri ── */
   const [formData, setFormData] = useState({
@@ -66,6 +80,55 @@ function App() {
       alert('Form başarıyla gönderildi!')
       setFormData({ adSoyad: '', email: '', konu: '', mesaj: '' })
     }
+  }
+
+  /* ── Projeleri fetch et ── */
+  useEffect(() => {
+    let cancelled = false
+
+    async function load() {
+      try {
+        setLoading(true)
+        setError(null)
+        const data = await fetchProjects()
+        if (!cancelled) {
+          setProjects(data)
+        }
+      } catch (err) {
+        if (!cancelled) {
+          const message = err instanceof Error ? err.message : 'Projeler yüklenirken hata oluştu.'
+          setError(message)
+        }
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+
+    load()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  /* ── Derived State: Filtrelenmiş projeler ── */
+  const filteredProjects = applyFilters(projects, filters)
+
+  /* ── Filtre handler'ları ── */
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters((prev) => ({ ...prev, search: e.target.value }))
+  }
+
+  const handleCategoryChange = (category: FilterState['category']) => {
+    setFilters((prev) => ({ ...prev, category }))
+  }
+
+  const handleSortFieldChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters((prev) => ({ ...prev, sortField: e.target.value as SortField }))
+  }
+
+  const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters((prev) => ({ ...prev, sortOrder: e.target.value as SortOrder }))
   }
 
   /* ── Dark mode toggle ── */
@@ -199,49 +262,131 @@ function App() {
         <section id="projelerim" aria-labelledby="projelerim-baslik" className="scroll-mt-24">
           <h2 id="projelerim-baslik" className="text-3xl font-bold text-accent dark:text-purple-400 mb-8">Projelerim</h2>
 
+          {/* Filtreler */}
+          <div className="mb-8 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+              {/* Arama */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" htmlFor="project-search">
+                  Proje Ara
+                </label>
+                <input
+                  id="project-search"
+                  type="text"
+                  value={filters.search}
+                  onChange={handleSearchChange}
+                  placeholder="Başlık, açıklama veya teknoloji..."
+                  className="w-full rounded-lg border px-4 py-2.5 text-base outline-none transition-colors duration-200 focus:ring-2 focus:ring-primary/50 focus:border-primary dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                />
+              </div>
+
+              {/* Kategori butonları */}
+              <div className="flex flex-wrap gap-2">
+                {([
+                  { id: 'all', label: 'Tümü' },
+                  { id: 'frontend', label: 'Frontend' },
+                  { id: 'fullstack', label: 'Fullstack' },
+                  { id: 'backend', label: 'Backend' },
+                ] as const).map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleCategoryChange(item.id as FilterState['category'])}
+                    className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors cursor-pointer ${
+                      filters.category === item.id
+                        ? 'bg-primary text-white border-primary'
+                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Sıralama */}
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" htmlFor="sort-field">
+                    Sırala
+                  </label>
+                  <select
+                    id="sort-field"
+                    value={filters.sortField}
+                    onChange={handleSortFieldChange}
+                    className="w-full rounded-lg border px-3 py-2 text-sm outline-none dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                  >
+                    <option value="year">Yıla göre</option>
+                    <option value="title">Başlığa göre</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" htmlFor="sort-order">
+                    Yön
+                  </label>
+                  <select
+                    id="sort-order"
+                    value={filters.sortOrder}
+                    onChange={handleSortOrderChange}
+                    className="w-full rounded-lg border px-3 py-2 text-sm outline-none dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                  >
+                    <option value="desc">Azalan</option>
+                    <option value="asc">Artan</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* Loading / Error */}
+            {loading && (
+              <p className="text-sm text-muted">Projeler yükleniyor...</p>
+            )}
+            {error && !loading && (
+              <p className="text-sm text-error font-medium">Hata: {error}</p>
+            )}
+          </div>
+
+          {/* Proje listesi */}
+          {!loading && !error && filteredProjects.length === 0 && (
+            <p className="text-muted">Eşleşen proje bulunamadı.</p>
+          )}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card variant="elevated" title="Portfolyo Web Sitesi">
-              <p className="mb-4">
-                React, TypeScript ve Vite kullanılarak geliştirilen kişisel
-                portfolyo sayfası. Semantik HTML5 ve erişilebilirlik
-                standartlarına uygun tasarlanmıştır.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {['React', 'TypeScript', 'Vite'].map((t) => (
-                  <span key={t} className="bg-primary/10 text-primary dark:bg-blue-900/40 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-medium">{t}</span>
-                ))}
-              </div>
-            </Card>
-
-            <Card variant="elevated" title="Tatil Masrafım: Bütçe Takip">
-              <p className="mb-4">
-                Flutter/Dart kullanılarak geliştirilmiş tatil bütçe takip ve paylaşım uygulaması.
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {['Flutter', 'Dart'].map((t) => (
-                  <span key={t} className="bg-primary/10 text-primary dark:bg-blue-900/40 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-medium">{t}</span>
-                ))}
-              </div>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.dasapps.tatilmasrafim&hl=tr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-sm font-semibold text-secondary hover:text-primary dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-              >
-                Google Play'de Görüntüle →
-              </a>
-            </Card>
-
-            <Card variant="elevated" title="Hava Durumu">
-              <p className="mb-4">
-                OpenWeather API ile anlık hava durumu bilgisi sunan web uygulaması.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {['JavaScript', 'API'].map((t) => (
-                  <span key={t} className="bg-primary/10 text-primary dark:bg-blue-900/40 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-medium">{t}</span>
-                ))}
-              </div>
-            </Card>
+            {filteredProjects.map((project) => (
+              <Card key={project.id} variant={project.featured ? 'elevated' : 'outlined'} title={project.title}>
+                <p className="mb-3 text-sm text-gray-700 dark:text-gray-300">{project.description}</p>
+                <p className="mb-2 text-xs text-muted">Yıl: {project.year} • Kategori: {project.category}</p>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {project.tech.map((t) => (
+                    <span key={t} className="bg-primary/10 text-primary dark:bg-blue-900/40 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-medium">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-2 flex-wrap">
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold text-secondary hover:text-primary dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      Canlı Demo →
+                    </a>
+                  )}
+                  {project.sourceUrl && (
+                    <a
+                      href={project.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold text-secondary hover:text-primary dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      Kaynak Kod →
+                    </a>
+                  )}
+                </div>
+              </Card>
+            ))}
           </div>
         </section>
 
